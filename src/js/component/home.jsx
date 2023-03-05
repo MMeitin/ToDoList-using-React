@@ -1,26 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import Form from "./form.jsx";
+import List from "./list.jsx";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
 const Home = () => {
-	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
-	);
+  const [toDos, setToDos] = useState([]);
+
+  const handleToDo = (addToDos) => {
+    setToDos([...toDos, addToDos]);
+  };
+
+  const handleDelete = (id) => {
+    const newList = toDos.filter((item) => item.id !== id); // crea una nueva lista sin la tarea con el id dado
+    setToDos(newList); // actualiza el estado de la lista de tareas
+  };
+  
+  return (
+    <div className="content-home">
+      <h1>Tareas</h1>
+      <div className="content-form">
+        <Form handleToDo={handleToDo} />
+        {toDos.map((item) => (
+          <List key={item.id} toDos={item} handleDelete={handleDelete} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Home;
