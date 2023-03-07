@@ -10,28 +10,27 @@ const Form = ({ handleToDo }) => {
     //console.log(e.target.value);
     setTodo(e.target.value);
   };
-  //   const keyPress = (e) => {
-  //     e.keyCode === 13 ? handleToDo(toDo) : console.log("Nein");
-  //     setTodo("");
-  //   };
-  const handleSubmit = (e) => {
-    e.preventDefault(); // evita que el formulario se recargue
-    handleToDo(toDo); // llama a la función que maneja la tarea
-    setTodo(""); // limpia el estado del input
+  const keyPress = (e) => {
+    if (e.keyCode === 13 && toDo.length >= 5){
+      handleToDo(toDo);
+      setTodo("");
+    }
+    else {
+      console.log('no tiene más de 5 caractéres')
+    }  
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="form-control"
-          type="text"
-          id="toDo"
-          value={toDo}
-          placeholder="Escribe tu tarea..."
-          onChange={handleChange}
-        ></input>
-      </form>
+      <input
+        className="form-control"
+        type="text"
+        id="toDo"
+        onKeyDown={keyPress}
+        value={toDo}
+        placeholder="Escribe tu tarea..."
+        onChange={handleChange}
+      ></input>
     </>
   );
 };
