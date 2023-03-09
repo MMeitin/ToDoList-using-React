@@ -1,10 +1,14 @@
 import React from "react";
 
-const List = ({ toDos, handleDelete }) => {
+const List = ({ toDo, handleDelete, handleCheck }) => {
   return (
     <div className="card card-body">
-      <p>{toDos}</p>
-      <button onClick={() => handleDelete(toDos)}>X</button>
+      <p>{toDo}</p>
+      <button onClick={() => handleDelete(toDo)}>X</button>
+      <input
+        type="checkbox"
+        onChange={() => (handleCheck(toDo), handleCheck2)}
+      />
     </div>
   );
 };

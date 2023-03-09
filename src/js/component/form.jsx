@@ -11,13 +11,12 @@ const Form = ({ handleToDo }) => {
     setTodo(e.target.value);
   };
   const keyPress = (e) => {
-    if (e.keyCode === 13 && toDo.length >= 5){
+    if (e.keyCode === 13 && toDo.length >= 5) {
       handleToDo(toDo);
       setTodo("");
+    } else {
+      console.log("no tiene más de 5 caractéres");
     }
-    else {
-      console.log('no tiene más de 5 caractéres')
-    }  
   };
 
   return (
